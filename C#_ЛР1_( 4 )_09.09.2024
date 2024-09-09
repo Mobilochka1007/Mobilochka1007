@@ -1,0 +1,32 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        
+        string input = "Це приклад речення для завдання";
+
+        
+        string[ ] words = input.Split(' ');
+
+        
+        if (words.Length >= 2)
+        {
+            
+            string temp = words[0];
+            words[0] = words[1];
+            words[1] = temp;
+
+            
+            string result = string.Join(" ", words);
+
+            
+            Console.WriteLine("Нове речення: " + result);
+        }
+        else
+        {
+            Console.WriteLine("Введене речення містить менше двох слів.");
+        }
+    }
+}
