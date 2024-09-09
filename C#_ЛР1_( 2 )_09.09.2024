@@ -1,0 +1,19 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        
+        string input = "абпаваа";
+
+        
+        char firstChar = input[0];
+
+        
+        string result = input.Replace(firstChar.ToString(), "");
+
+        Console.WriteLine("Рядок пiсля видалення першого символу: " + result);
+    }
+}
+
