@@ -1,0 +1,24 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        
+        string input = "Привет мне нужна... помощь, как дела?, чем могу помочь :) ";
+
+        
+        int lastDotIndex = input.LastIndexOf('.');
+
+        
+        if (lastDotIndex != -1 && lastDotIndex < input.Length - 1)
+        {
+            int count = input.Length - lastDotIndex - 1;
+            Console.WriteLine("Количество символов после последней точки: " + count);
+        }
+        else
+        {
+            Console.WriteLine("В строке нет точки или она стоит в конце.");
+        }
+    }
+}
