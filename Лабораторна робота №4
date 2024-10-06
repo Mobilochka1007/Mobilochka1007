@@ -1,0 +1,76 @@
+using System;
+using System.Collections.Generic;
+
+struct Discipline
+{
+    public string SubjectName;
+    public string TeacherSurname;
+    public int Hours;
+    
+    public Discipline(string subjectName, string teacherSurname, int hours)
+    {
+        SubjectName = subjectName;
+        TeacherSurname = teacherSurname;
+        Hours = hours;
+    }
+
+    public string DisplayInfo()
+    {
+        return $"Предмет: {SubjectName}, Викладач: {TeacherSurname}, Кiлькiсть годин: {Hours}";
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        List<Discipline> disciplines = new List<Discipline>();
+
+        Console.Write("Скiльки дисциплiн ви хочете додати? ");
+        int n = int.Parse(Console.ReadLine());
+
+        for (int i = 0; i < n; i++)
+        {
+            Console.Write("Введiть назву предмета: ");
+            string subjectName = Console.ReadLine();
+            Console.Write("Введiть прiзвище викладача: ");
+            string teacherSurname = Console.ReadLine();
+            Console.Write("Введiть кiлькiсть годин: ");
+            int hours = int.Parse(Console.ReadLine());
+
+            disciplines.Add(new Discipline(subjectName, teacherSurname, hours));
+        }
+
+        Console.WriteLine("\nСписок дисциплiн:");
+        foreach (var discipline in disciplines)
+        {
+            Console.WriteLine(discipline.DisplayInfo());
+        }
+
+        Console.Write("\nВведiть назву предмета для пошуку викладачiв: ");
+        string searchSubject = Console.ReadLine();
+
+        Console.WriteLine($"Викладачi, якi викладають предмет {searchSubject}:");
+        foreach (var discipline in disciplines)
+        {
+            if (discipline.SubjectName == searchSubject)
+            {
+                Console.WriteLine(discipline.TeacherSurname);
+            }
+        }
+
+        Console.Write("\nВведiть прiзвище викладача для обчислення загального навантаження: ");
+        string searchTeacher = Console.ReadLine();
+
+        int totalHours = 0;
+        foreach (var discipline in disciplines)
+        {
+            if (discipline.TeacherSurname == searchTeacher)
+            {
+                totalHours += discipline.Hours;
+            }
+        }
+
+        Console.WriteLine($"Загальне навантаження викладача {searchTeacher}: {totalHours} годин.");
+    }
+}
