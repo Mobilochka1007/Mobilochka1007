@@ -1,0 +1,100 @@
+using System;
+
+public class TCircle
+{
+
+    private double radius;
+    private (double X, double Y) center;
+
+    public TCircle()
+    {
+        radius = 0.0;
+        center = (0.0, 0.0);
+    }
+
+    public TCircle(double radius, double x, double y)
+    {
+        this.radius = radius;
+        center = (x, y);
+    }
+
+    public TCircle(TCircle other)
+    {
+        radius = other.radius;
+        center = other.center;
+    }
+
+    public void Input()
+    {
+        Console.Write("Введiть радiус: ");
+        radius = double.Parse(Console.ReadLine());
+
+        Console.Write("Введiть координату X центру: ");
+        center.X = double.Parse(Console.ReadLine());
+
+        Console.Write("Введiть координату Y центру: ");
+        center.Y = double.Parse(Console.ReadLine());
+    }
+
+    public void Output()
+    {
+        Console.WriteLine($"Радiус: {radius}");
+        Console.WriteLine($"Центр: ({center.X}, {center.Y})");
+    }
+
+    public double Area()
+    {
+        return Math.PI * radius * radius;
+    }
+
+    public bool ContainsPoint(double x, double y)
+    {
+        double distance = Math.Sqrt(Math.Pow(x - center.X, 2) + Math.Pow(y - center.Y, 2));
+        return distance <= radius;
+    }
+
+    public static TCircle operator +(TCircle c1, TCircle c2)
+    {
+        return new TCircle(c1.radius + c2.radius, c1.center.X, c1.center.Y);
+    }
+
+    public static TCircle operator -(TCircle c1, TCircle c2)
+    {
+        return new TCircle(Math.Abs(c1.radius - c2.radius), c1.center.X, c1.center.Y);
+    }
+
+    public static TCircle operator *(TCircle c, double multiplier)
+    {
+        return new TCircle(c.radius * multiplier, c.center.X, c.center.Y);
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        TCircle circle1 = new TCircle();
+        TCircle circle2 = new TCircle(5.0, 3.0, 4.0);
+
+        circle1.Input();
+        circle1.Output();
+        circle2.Output();
+
+        Console.WriteLine($"Площа кола 1: {circle1.Area()}");
+        Console.WriteLine($"Площа кола 2: {circle2.Area()}");
+
+        Console.WriteLine("Чи належить точка (3, 3) колу 1? " + (circle1.ContainsPoint(3, 3) ? "Так" : "Ні"));
+
+        TCircle circle3 = circle1 + circle2;
+        Console.WriteLine("Результат додавання радiусiв:");
+        circle3.Output();
+
+        TCircle circle4 = circle2 - circle1;
+        Console.WriteLine("Результат вiднiмання радiусiв:");
+        circle4.Output();
+
+        TCircle circle5 = circle2 * 2;
+        Console.WriteLine("Результат множення радiуса на число:");
+        circle5.Output();
+    }
+}
